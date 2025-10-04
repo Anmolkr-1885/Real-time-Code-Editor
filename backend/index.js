@@ -10,6 +10,26 @@ import axios from "axios";
 
 const server = http.createServer(app);
 
+
+
+const url = `https://real-time-code-editor-00mi.onrender.com`;
+const interval = 30000;
+
+function reloadWebsite() {
+  axios
+    .get(url)
+    .then((response) => {
+      console.log("website reloded");
+    })
+    .catch((error) => {
+      console.error(`Error : ${error.message}`);
+    });
+}
+
+setInterval(reloadWebsite, interval);
+
+
+
 const io = new Server(server, {
   cors: {
     origin: "*",
