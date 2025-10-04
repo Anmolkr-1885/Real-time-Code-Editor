@@ -3,6 +3,7 @@ import io from "socket.io-client";
 import { useState } from "react";
 import Editor from "@monaco-editor/react";
 import { useEffect } from "react";
+import { set } from "mongoose";
 
 const socket = io("https://real-time-code-editor-00mi.onrender.com");
 
@@ -14,6 +15,8 @@ const App = () => {
   const [code, setCode] = useState("// code goes here");
   const [users,setUsers]=useState([]);
   const [typing,setTyping]=useState("");
+  const [output,setOutput]=useState(""); 
+  const [version,setVersion]=useState("*");
 
   useEffect(()=>{
     socket.on("user-joined",(users)=>{
@@ -38,6 +41,11 @@ const App = () => {
     socket.on("language-update",(language)=>{
       setLanguage(language);
     })
+
+    socket.on("codeResponse",(response)=>{
+      console.log(response);
+      setOutput(response);
+    })
      
     
     return()=>{
@@ -46,6 +54,7 @@ const App = () => {
       socket.off("user-typing");
       socket.off("language-update");
       socket.off("user-left");
+      socket.off("codeResponse");
     }
 
 
@@ -95,6 +104,10 @@ const App = () => {
     socket.emit("language-change",{roomId,language:e.target.value});
   }
 
+
+   const runCode = async () =>{
+    socket.emit("compile-code",{roomId,language,code,version});
+   }
 
   if (!joined) {
     return (
@@ -156,7 +169,7 @@ const App = () => {
       </div>
       <div className="editor-main">
       <Editor
-        height="100vh"
+        height="60%"
         defaultLanguage="language"
         language={language}
         value={code}
@@ -169,6 +182,8 @@ const App = () => {
         }}
       
        />
+       <button className="run-btn" onClick={runCode}> RUN CODE </button>
+      <textarea className="output-area" value={output} readOnly placeholder="Output will be displayed here..."></textarea>
 
       </div>
       

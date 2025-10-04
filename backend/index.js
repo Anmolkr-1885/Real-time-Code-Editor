@@ -3,8 +3,8 @@ import http from "http";
 const app = express();
 import { Server } from "socket.io";
 import path from "path";
-
-
+import { version } from "os";
+import axios from "axios";
 
 
 
@@ -65,6 +65,35 @@ io.on("connection", (socket) => {
    socket.on("language-change",({roomId,language})=>{
     socket.to(roomId).emit("language-update",language);
    })
+
+
+
+socket.on("compile-code", async ({ roomId, language, code, version }) => {
+  if (rooms.has(roomId)) {
+    try {
+      const response = await axios.post(
+        "https://emkc.org/api/v2/piston/execute",
+        {
+          language: language,
+          version: version,
+          files: [
+            {
+              content: code,
+            },
+          ],
+        }
+      );
+
+      // Emit the compile result back to room
+      const room = rooms.get(roomId);
+     io.to(roomId).emit("codeResponse", response.data.run.output);
+
+    } catch (error) {
+      console.error(error);
+    }
+  }
+});
+
 
    socket.on("disconnect",()=>{
     if(currentRoom && currentUser){

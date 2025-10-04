@@ -1,158 +1,183 @@
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-body{
-  font-family:"Roboto",sans-serif;
-  background-color:#f0f2f5;
+body {
+  font-family: "Inter", "Roboto", "Segoe UI", sans-serif;
+  background-color: #f0f2f5;
   color: #333;
+  line-height: 1.6;
 }
 
-/* Join Page */
-.join-container{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  height:100vh;
-  background: linear-gradient(130deg, #71b7e6, #9b59b6);  
+/* -----------------------------
+   JOIN PAGE STYLING
+----------------------------- */
+.join-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #007acc, #6a11cb, #2575fc);
+  background-size: 200% 200%;
+  animation: gradientMove 8s ease infinite;
 }
 
-.join-form{
-  background-color: #fff;
-  padding:2rem;
-  border-radius:8px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.join-form {
+  background: #fff;
+  padding: 2.5rem;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
   text-align: center;
-  width:400px;
+  width: 380px;
+  transition: transform 0.2s ease;
 }
 
-h1{
-  margin-bottom:1.5rem;
-  color:#333;
+.join-form:hover {
+  transform: translateY(-3px);
 }
 
-input{
-  width:100%;
-  padding:0.75rem;
-  margin-bottom:1rem;
-  border:1px solid #ccc;
-  border-radius:4px;
-  font-size:1rem;
+.join-form h1 {
+  margin-bottom: 1.8rem;
+  font-size: 1.8rem;
+  color: #2c3e50;
 }
 
-#join-btn{
-  width:100%;
-  padding:0.75rem;
-  background-color:#1d7ce2;
-  color:#efe6e6;
-  border:none;
-  border-radius:4px;
-  font-size:1rem;
-  cursor:pointer;
-  transition: background-color 0.3s ease;
+.join-form input {
+  width: 100%;
+  padding: 0.9rem;
+  margin-bottom: 1.2rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border 0.2s;
 }
 
-#join-btn:hover{
-  background-color:#357ab8;
+.join-form input:focus {
+  border-color: #007acc;
+  outline: none;
 }
 
-/* Editor Page Container */
+#join-btn {
+  width: 100%;
+  padding: 0.9rem;
+  background: #007acc;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#join-btn:hover {
+  background: #005fa3;
+}
+
+/* -----------------------------
+   EDITOR PAGE STYLING
+----------------------------- */
 .editor-container {
   display: flex;
-  flex-direction: column; /* Column for mobile first */
+  flex-direction: column;
   height: 100vh;
   width: 100%;
-  background-color: #1e1e1e;
+  background: #1e1e1e;
   color: #fff;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Sidebar / Navbar */
+/* Sidebar */
 .editor-sidebar {
   display: flex;
   flex-direction: column;
-  background-color: #252526;
-  padding: 15px 20px;
-  border-bottom: 2px solid #333; /* horizontal on top */
-}
-
-/* Room Info */
-.room-info {
-  margin-bottom: 15px;
+  background: #252526;
+  padding: 20px;
+  border-bottom: 2px solid #333;
 }
 
 .room-info h2 {
-  font-size: 18px;
+  font-size: 1rem;
   margin-bottom: 10px;
+  color: #61dafb;
   word-break: break-word;
 }
 
 .room-info button {
-  background-color: #007acc;
-  color: white;
+  background: #007acc;
+  color: #fff;
   border: none;
-  padding: 8px 12px;
+  padding: 8px 14px;
   font-size: 14px;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
-  margin-top: 8px;
-  transition: background 0.2s ease-in-out;
+  transition: background 0.2s ease;
 }
 
 .room-info button:hover {
-  background-color: #005a9e;
+  background: #005a9e;
 }
 
-/* User List */
+/* User list */
 .editor-sidebar h3 {
-  font-size: 16px;
-  margin-bottom: 10px;
+  font-size: 0.95rem;
+  margin: 15px 0 8px;
+  color: #ddd;
 }
 
 .editor-sidebar ul {
   list-style: none;
-  padding: 0;
   margin-bottom: 15px;
+  max-height: 150px;
+  overflow-y: auto;
 }
 
 .editor-sidebar ul li {
-  background-color: #2d2d2d;
+  background: #2d2d2d;
   padding: 8px 10px;
   margin-bottom: 6px;
   border-radius: 4px;
   font-size: 14px;
+  color: #ccc;
 }
 
-/* Typing Indicator */
+/* Typing */
 .typing-indicator {
   font-style: italic;
-  color: #ccc;
+  font-size: 13px;
+  color: #bbb;
   margin-bottom: 15px;
 }
 
-/* Language Selector */
+/* Dropdown */
 .language-select {
   padding: 8px;
   font-size: 14px;
   border-radius: 4px;
   border: none;
   outline: none;
-  background-color: #2d2d2d;
+  background: #2d2d2d;
   color: white;
   margin-bottom: 15px;
   cursor: pointer;
 }
 
 .language-select option {
-  background-color: #1e1e1e;
+  background: #1e1e1e;
   color: #fff;
 }
 
 /* Leave Button */
 .leave-btn {
-  background-color: #d9534f;
+  background: #e74c3c;
   color: white;
   border: none;
   padding: 10px 14px;
@@ -160,24 +185,59 @@ input{
   border-radius: 5px;
   cursor: pointer;
   margin-top: auto;
-  transition: background 0.2s ease-in-out;
+  transition: background 0.2s;
 }
 
 .leave-btn:hover {
-  background-color: #c9302c;
+  background: #c0392b;
 }
 
-/* Main Editor Area */
+/* -----------------------------
+   MAIN EDITOR AREA
+----------------------------- */
 .editor-main {
   flex: 1;
-  background-color: #1e1e1e;
-  min-height: 400px; /* ensure editor is visible on mobile */
+  display: flex;
+  flex-direction: column;
+  background: #1e1e1e;
+  padding: 10px;
 }
 
-/* Desktop Layout */
-@media(min-width: 768px){
+.run-btn {
+  align-self: flex-start;
+  margin: 12px 0;
+  background: #28a745;
+  border: none;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.run-btn:hover {
+  background: #218838;
+}
+
+.output-area {
+  flex: 1;
+  background: #111;
+  border: 1px solid #333;
+  border-radius: 6px;
+  padding: 12px;
+  font-size: 14px;
+  color: #eee;
+  resize: none;
+  margin-top: 10px;
+}
+
+/* -----------------------------
+   RESPONSIVE
+----------------------------- */
+@media(min-width: 768px) {
   .editor-container {
-    flex-direction: row; /* sidebar left, editor right */
+    flex-direction: row;
   }
   .editor-sidebar {
     width: 280px;
