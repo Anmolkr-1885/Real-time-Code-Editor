@@ -5,7 +5,7 @@ import Editor from "@monaco-editor/react";
 import { useEffect } from "react";
 import { set } from "mongoose";
 
-const socket = io("https://real-time-code-editor-00mi.onrender.com");
+const socket = io("https://localhost:5000");
 
 const App = () => {
   const [joined, setJoined] = useState(false);
