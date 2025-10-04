@@ -3,7 +3,6 @@ import io from "socket.io-client";
 import { useState } from "react";
 import Editor from "@monaco-editor/react";
 import { useEffect } from "react";
-import { set } from "mongoose";
 
 const socket = io("https://localhost:5000");
 
